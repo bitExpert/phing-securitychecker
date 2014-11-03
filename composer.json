@@ -1,7 +1,7 @@
 {
     "name": "bitexpert/phing-securitychecker",
     "description": "Security Checker Phing Task",
-    "version": "0.2.0-dev",
+    "version": "0.1.0",
     "type": "library",
     "keywords" : [
         "Phing",
