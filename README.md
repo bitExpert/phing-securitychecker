@@ -13,7 +13,7 @@ composer.json:
 ```javascript
 {
     "require": {
-        "bitexpert/phing-securitychecker": "0.2.*@dev"
+        "bitexpert/phing-securitychecker": "0.1.*stable"
     }
 }
 ```
