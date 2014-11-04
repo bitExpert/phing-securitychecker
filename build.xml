@@ -3,7 +3,7 @@
 
     <taskdef name="securitychecker" classpath="${phing.dir.securitychecker}/src" classname="bitExpert\Phing\SecurityChecker\SecurityCheckerTask" />
 
-    <target name="check">
-        <securitychecker lockfile="composer.lock" />
+    <target name="security:check">
+        <securitychecker lockfile="${phing.dir}/composer.lock" />
     </target>
 </project>
