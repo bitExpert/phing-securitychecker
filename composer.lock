@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e24d4ce22f920d006a6b40447906811b",
-    "content-hash": "7da6398852d0f1284a663bf6ac3bec2d",
+    "hash": "81b4bea33880f86b82d6866b13190401",
+    "content-hash": "5eb077ed1cec156c4492859450bc64ec",
     "packages": [
         {
             "name": "phing/phing",
@@ -1155,6 +1155,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": "^5.5|^7.0"
+    },
     "platform-dev": []
 }
