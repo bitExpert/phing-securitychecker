@@ -16,11 +16,11 @@
     ],
     "license" : "Apache-2.0",
     "require": {
-        "phing/phing": "2.8.*@stable",
-        "sensiolabs/security-checker": "v2.0.0"
+        "phing/phing": "^2.8.0",
+        "sensiolabs/security-checker": "v3.0.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.3.*@stable"
+        "phpunit/phpunit": "^4.8"
     },
     "autoload": {
         "psr-4": {

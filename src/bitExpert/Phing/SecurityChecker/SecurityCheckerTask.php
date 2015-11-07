@@ -70,10 +70,10 @@ class SecurityCheckerTask extends \Task
 
         try {
             if (!empty($this->timeout)) {
-                $checker->setTimeout($this->timeout);
+                $checker->getCrawler()->setTimeout($this->timeout);
             }
             if (!empty($this->endPoint)) {
-                $checker->setEndPoint($this->endPoint);
+                $checker->getCrawler()->setEndPoint($this->endPoint);
             }
 
             $vulnerabilities = $checker->check($this->lockFile);

@@ -19,6 +19,10 @@ namespace bitExpert\Phing\SecurityChecker;
 class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var \SensioLabs\Security\Crawler\CrawlerInterface
+     */
+    private $crawler;
+    /**
      * @var \SensioLabs\Security\SecurityChecker
      */
     private $checker;
@@ -34,12 +38,19 @@ class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
+        $this->crawler = $this->getMock('\SensioLabs\Security\Crawler\CrawlerInterface');
         $this->checker = $this->getMock('\SensioLabs\Security\SecurityChecker');
         $this->checker->expects($this->any())
             ->method('check')
             ->will($this->returnValue([]));
+        $this->checker->expects($this->any())
+            ->method('getCrawler')
+            ->will($this->returnValue($this->crawler));
 
-        $this->checkerTask = $this->getMock('\bitExpert\Phing\SecurityChecker\SecurityCheckerTask', array('getSecurityChecker'));
+        $this->checkerTask = $this->getMock(
+            '\bitExpert\Phing\SecurityChecker\SecurityCheckerTask',
+            array('getSecurityChecker')
+        );
         $this->checkerTask->expects($this->any())
             ->method('getSecurityChecker')
             ->will($this->returnValue($this->checker));
@@ -70,7 +81,7 @@ class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
      */
     public function timeoutParameterShouldBePassedToSecurityCheckerWhenGiven()
     {
-        $this->checker->expects($this->once())
+        $this->crawler->expects($this->once())
             ->method('setTimeout');
 
         $this->checkerTask->setLockfile(__FILE__);
@@ -83,7 +94,7 @@ class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
      */
     public function endPointParameterShouldBePassedToSecurityCheckerWhenGiven()
     {
-        $this->checker->expects($this->once())
+        $this->crawler->expects($this->once())
             ->method('setEndPoint');
 
         $this->checkerTask->setLockfile(__FILE__);
