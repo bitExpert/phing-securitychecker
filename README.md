@@ -12,12 +12,8 @@ Installation
 The preferred way of installation is through Composer. Add `bitexpert/phing-securitychecker` as a dependency to 
 composer.json:
 
-```javascript
-{
-    "require": {
-        "bitexpert/phing-securitychecker": "0.1.*stable"
-    }
-}
+```
+composer.phar require bitexpert/phing-securitychecker
 ```
 
 Example
