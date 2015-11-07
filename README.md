@@ -4,6 +4,8 @@ phing-securitychecker
 A Phing task for interacting with the SensioLabs Security Advisories Checker to check if your application uses 
 dependencies with known security vulnerabilities.
 
+[![Build Status](https://travis-ci.org/bitExpert/phing-securitychecker.svg?branch=release%2Fr0.1.0)](https://travis-ci.org/bitExpert/phing-securitychecker)
+
 Installation
 ------------
 
