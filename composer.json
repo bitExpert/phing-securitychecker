@@ -22,7 +22,10 @@
     "sensiolabs/security-checker": "v3.0.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.8"
+    "phpunit/php-code-coverage": "^2.1.0",
+    "phpunit/phpunit": "^4.8",
+    "squizlabs/php_codesniffer": "^2.3",
+    "phpdocumentor/phpdocumentor": "^2.8"
   },
   "autoload": {
     "psr-4": {
