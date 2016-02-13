@@ -10,7 +10,7 @@ dependencies with known security vulnerabilities.
 Installation
 ------------
 
-The preferred way of installation is through Composer. Add `bitexpert/phing-securitychecker` as a dependency to 
+The preferred way of installing `bitexpert/phing-securitychecker` is through Composer. Add `bitexpert/phing-securitychecker` as a dependency to 
 composer.json:
 
 ```
