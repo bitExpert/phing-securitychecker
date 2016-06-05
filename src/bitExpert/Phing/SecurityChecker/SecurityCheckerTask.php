@@ -62,7 +62,7 @@ class SecurityCheckerTask extends \Task
             throw new \BuildException('Lockfile needs to be set!');
         }
 
-        if (!file_exists($this->lockFile) or !is_readable($this->lockFile)) {
+        if (!file_exists($this->lockFile) || !is_readable($this->lockFile)) {
             throw new \BuildException('Given Lockfile does not exist or is not readable!');
         }
 
