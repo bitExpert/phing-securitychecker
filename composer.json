@@ -18,7 +18,7 @@
   "require": {
     "php": "^5.5|^7.0",
     "phing/phing": "^2.8.0",
-    "sensiolabs/security-checker": "v3.0.2"
+    "sensiolabs/security-checker": "~3.0"
   },
   "require-dev": {
     "phpunit/php-code-coverage": "^2.1.0",
