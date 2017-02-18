@@ -34,5 +34,14 @@
     "psr-4": {
       "bitExpert\\Phing\\SecurityChecker\\": "tests/bitExpert/Phing/SecurityChecker"
     }
+  },
+  "scripts": {
+    "check": [
+      "@cs-check",
+      "@test"
+    ],
+    "cs-check": "vendor/bin/phpcs --standard=PSR2 src tests",
+    "cs-fix": "/vendor/bin/phpcbf src tests",
+    "test": "vendor/bin/phpunit"
   }
 }
