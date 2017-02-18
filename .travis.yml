@@ -17,4 +17,4 @@ before_script:
 script:
     - composer validate
     - ./vendor/bin/phpunit
-    - ./vendor/bin/phpcs --standard=PSR2 src
+    - ./vendor/bin/phpcs --standard=PSR2 src tests
