@@ -12,6 +12,7 @@
 namespace bitExpert\Phing\SecurityChecker;
 
 use bitExpert\Phing\SecurityChecker\SecurityCheckerTask;
+use PHPUnit\Framework\TestCase;
 use SensioLabs\Security\Crawler\CrawlerInterface;
 use SensioLabs\Security\SecurityChecker;
 
@@ -20,14 +21,14 @@ use SensioLabs\Security\SecurityChecker;
  *
  * @covers \bitExpert\Phing\SecurityChecker\SecurityCheckerTask
  */
-class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
+class SecurityCheckerTaskUnitTest extends TestCase
 {
     /**
-     * @var CrawlerInterface
+     * @var CrawlerInterface|TestCase
      */
     private $crawler;
     /**
-     * @var SecurityChecker
+     * @var SecurityChecker|TestCase
      */
     private $checker;
     /**
@@ -42,8 +43,8 @@ class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->crawler = $this->getMock(CrawlerInterface::class);
-        $this->checker = $this->getMock(SecurityChecker::class);
+        $this->crawler = $this->createMock(CrawlerInterface::class);
+        $this->checker = $this->createMock(SecurityChecker::class);
         $this->checker->expects($this->any())
             ->method('check')
             ->will($this->returnValue([]));
@@ -51,9 +52,9 @@ class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
             ->method('getCrawler')
             ->will($this->returnValue($this->crawler));
 
-        $this->checkerTask = $this->getMock(
+        $this->checkerTask = $this->createPartialMock(
             SecurityCheckerTask::class,
-            array('getSecurityChecker')
+            ['getSecurityChecker']
         );
         $this->checkerTask->expects($this->any())
             ->method('getSecurityChecker')
