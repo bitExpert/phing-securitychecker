@@ -6,6 +6,7 @@ dependencies with known security vulnerabilities.
 
 [![Build Status](https://travis-ci.org/bitExpert/phing-securitychecker.svg?branch=master)](https://travis-ci.org/bitExpert/phing-securitychecker)
 [![Dependency Status](https://www.versioneye.com/user/projects/57d9b5111b70a7003f25a522/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57d9b5111b70a7003f25a522)
+[![Coverage Status](https://coveralls.io/repos/github/bitExpert/phing-securitychecker/badge.svg?branch=master)](https://coveralls.io/github/bitExpert/phing-securitychecker?branch=master)
 
 Installation
 ------------
