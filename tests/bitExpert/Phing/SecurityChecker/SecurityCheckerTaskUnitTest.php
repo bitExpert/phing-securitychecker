@@ -16,9 +16,9 @@ use SensioLabs\Security\Crawler\CrawlerInterface;
 use SensioLabs\Security\SecurityChecker;
 
 /**
- * Unit test for {@link \bitExpert\Phing\SecurityChecker\SecurityChecker}.
+ * Unit test for {@link \bitExpert\Phing\SecurityChecker\SecurityCheckerTask}.
  *
- * @covers \bitExpert\Phing\SecurityChecker\SecurityChecker
+ * @covers \bitExpert\Phing\SecurityChecker\SecurityCheckerTask
  */
 class SecurityCheckerTaskUnitTest extends \PHPUnit_Framework_TestCase
 {
