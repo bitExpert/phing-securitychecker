@@ -5,7 +5,7 @@ A Phing task for interacting with the SensioLabs Security Advisories Checker to 
 dependencies with known security vulnerabilities.
 
 [![Build Status](https://travis-ci.org/bitExpert/phing-securitychecker.svg?branch=master)](https://travis-ci.org/bitExpert/phing-securitychecker)
-[![Dependency Status](https://www.versioneye.com/user/projects/55369f7f7f43bcd889000181/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55369f7f7f43bcd889000181)
+[![Dependency Status](https://www.versioneye.com/user/projects/57d9b5111b70a7003f25a522/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/57d9b5111b70a7003f25a522)
 
 Installation
 ------------
