@@ -11,7 +11,6 @@
 
 namespace bitExpert\Phing\SecurityChecker;
 
-use bitExpert\Phing\SecurityChecker\SecurityCheckerTask;
 use PHPUnit\Framework\TestCase;
 use SensioLabs\Security\Crawler\CrawlerInterface;
 use SensioLabs\Security\SecurityChecker;
@@ -43,23 +42,7 @@ class SecurityCheckerTaskUnitTest extends TestCase
     {
         parent::setUp();
 
-        $this->crawler = $this->createMock(CrawlerInterface::class);
-        $this->checker = $this->createMock(SecurityChecker::class);
-        $this->checker->expects($this->any())
-            ->method('check')
-            ->will($this->returnValue([]));
-        $this->checker->expects($this->any())
-            ->method('getCrawler')
-            ->will($this->returnValue($this->crawler));
-
-        $this->checkerTask = $this->createPartialMock(
-            SecurityCheckerTask::class,
-            ['getSecurityChecker']
-        );
-        $this->checkerTask->expects($this->any())
-            ->method('getSecurityChecker')
-            ->will($this->returnValue($this->checker));
-        $this->checkerTask->setProject(new \Project());
+        $this->createMockObjects();
     }
 
     /**
@@ -109,15 +92,99 @@ class SecurityCheckerTaskUnitTest extends TestCase
 
     /**
      * @test
+     */
+    public function advisoriesIncludingLinkWillCallLogMethodFiveTimes()
+    {
+        $vulnerabilities = [
+            'my/dependency' => [
+                'version' => '1.0.0',
+                'advisories' => [
+                    0 => [
+                        'title' => 'Advisories title',
+                        'cve' => 'CVE-2017-0001',
+                        'link' => 'http://localhost'
+                    ]
+                ]
+            ]
+        ];
+        $this->createMockObjects($vulnerabilities);
+
+        $this->checkerTask->expects($this->exactly(5))
+            ->method('log');
+
+        $this->checkerTask->setLockfile(__FILE__);
+        $this->checkerTask->setEndPoint('http://localhost');
+        $this->checkerTask->main();
+    }
+
+    /**
+     * @test
+     */
+    public function advisoriesWithEmptyLinkWillCallLogMethodFourTimes()
+    {
+        $vulnerabilities = [
+            'my/dependency' => [
+                'version' => '1.0.0',
+                'advisories' => [
+                    0 => [
+                        'title' => 'Some title',
+                        'cve' => 'CVE-2017-0001',
+                        'link' => ''
+                    ]
+                ]
+            ]
+        ];
+        $this->createMockObjects($vulnerabilities);
+
+        $this->checkerTask->expects($this->exactly(4))
+            ->method('log');
+
+        $this->checkerTask->setLockfile(__FILE__);
+        $this->checkerTask->setEndPoint('http://localhost');
+        $this->checkerTask->main();
+    }
+
+    /**
+     * @test
      * @expectedException \BuildException
      */
     public function throwsBuildExceptionWhenVulnerabilitiesFound()
     {
-        $this->checker->expects($this->any())
+        $this->checker->expects($this->once())
             ->method('getLastVulnerabilityCount')
             ->will($this->returnValue(1));
 
         $this->checkerTask->setLockfile(__FILE__);
         $this->checkerTask->main();
+    }
+
+    /**
+     * Helper method to create all required mock objects and configure the {@link \SensioLabs\Security\SecurityChecker}
+     * instance to return the given $vulnerabilities.
+     *
+     * @param array $vulnerabilities
+     */
+    protected function createMockObjects(array $vulnerabilities = [])
+    {
+        $this->crawler = $this->createMock(CrawlerInterface::class);
+        $this->checker = $this->createMock(SecurityChecker::class);
+        $this->checker->expects($this->any())
+            ->method('check')
+            ->will($this->returnValue($vulnerabilities));
+        $this->checker->expects($this->any())
+            ->method('getCrawler')
+            ->will($this->returnValue($this->crawler));
+
+        $this->checkerTask = $this->createPartialMock(
+            SecurityCheckerTask::class,
+            [
+                'getSecurityChecker',
+                'log'
+            ]
+        );
+        $this->checkerTask->expects($this->any())
+            ->method('getSecurityChecker')
+            ->will($this->returnValue($this->checker));
+        $this->checkerTask->setProject(new \Project());
     }
 }
