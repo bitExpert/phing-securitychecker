@@ -27,6 +27,15 @@ Import the default build.xml to let Phing know about the Security Checker task:
     <import file="vendor/bitexpert/phing-securitychecker/build.xml" />
 ```
 
+If you imported the default build.xml, you are able to define the lock file
+path as well the as the webservice endpoint by defining two properties
+in your main build.xml file:
+
+```xml
+    <property name="securitychecker.lockfile" value="composer.lock" />
+    <property name="securitychecker.endpoint" value="https://security.sensiolabs.org/check_lock" />
+```
+
 Or define the securitychecker task on your own:
 
 ```xml

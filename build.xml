@@ -4,6 +4,21 @@
     <taskdef name="securitychecker" classpath="${phing.dir.securitychecker}/src" classname="bitExpert\Phing\SecurityChecker\SecurityCheckerTask" />
 
     <target name="security:check">
-        <securitychecker lockfile="${phing.dir}/composer.lock" />
+        <if>
+            <or>
+                <not>
+                    <isset property="securitychecker.lockfile" />
+                </not>
+                <equals arg1="${securitychecker.lockfile}" arg2="" trim="true" />
+            </or>
+            <then>
+                <property name="securitychecker.lockfile" value="${phing.dir}/composer.lock" override="true" />
+            </then>
+        </if>
+
+        <echo msg="Lockfile: ${securitychecker.lockfile}"/>
+        <echo msg="Endpoint: ${securitychecker.endpoint}"/>
+
+        <securitychecker lockfile="${securitychecker.lockfile}" endpoint="${securitychecker.endpoint}" />
     </target>
 </project>
