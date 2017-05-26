@@ -16,9 +16,6 @@
             </then>
         </if>
 
-        <echo msg="Lockfile: ${securitychecker.lockfile}"/>
-        <echo msg="Endpoint: ${securitychecker.endpoint}"/>
-
         <securitychecker lockfile="${securitychecker.lockfile}" endpoint="${securitychecker.endpoint}" />
     </target>
 </project>
