@@ -2,11 +2,18 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.3.0 - TBD
+## 0.3.0
 
 ### Added
 
-- Nothing.
+- [#9](https://github.com/bitExpert/phing-securitychecker/pull/9) Add build properties to be able to pass configuration options to the task
+- [#8](https://github.com/bitExpert/phing-securitychecker/pull/8) Refactor unit tests
+- [#7](https://github.com/bitExpert/phing-securitychecker/pull/7) Migrate to PHPUnit 6.x
+- [#6](https://github.com/bitExpert/phing-securitychecker/pull/6) Update security-checker dependency
+- [#5](https://github.com/bitExpert/phing-securitychecker/pull/5) Enable coveralls support
+- [#4](https://github.com/bitExpert/phing-securitychecker/pull/4) Add contributing guide
+- [#3](https://github.com/bitExpert/phing-securitychecker/pull/3) Drop support for PHP 5.x
+- [#2](https://github.com/bitExpert/phing-securitychecker/pull/2) Changed dependency version rule to fetch latest updates
 
 ### Deprecated
 
