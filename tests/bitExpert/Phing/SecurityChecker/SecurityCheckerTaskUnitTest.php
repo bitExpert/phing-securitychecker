@@ -12,7 +12,7 @@
 namespace bitExpert\Phing\SecurityChecker;
 
 use PHPUnit\Framework\TestCase;
-use SensioLabs\Security\Crawler\CrawlerInterface;
+use SensioLabs\Security\Crawler;
 use SensioLabs\Security\SecurityChecker;
 
 /**
@@ -23,7 +23,7 @@ use SensioLabs\Security\SecurityChecker;
 class SecurityCheckerTaskUnitTest extends TestCase
 {
     /**
-     * @var CrawlerInterface|TestCase
+     * @var Crawler|TestCase
      */
     private $crawler;
     /**
@@ -92,8 +92,9 @@ class SecurityCheckerTaskUnitTest extends TestCase
 
     /**
      * @test
+     * @expectedException \BuildException
      */
-    public function advisoriesIncludingLinkWillCallLogMethodFiveTimes()
+    public function advisoriesIncludingLinkWillCallLogMethodFiveTimesAndThrowBuildException()
     {
         $vulnerabilities = [
             'my/dependency' => [
@@ -119,8 +120,9 @@ class SecurityCheckerTaskUnitTest extends TestCase
 
     /**
      * @test
+     * @expectedException \BuildException
      */
-    public function advisoriesWithEmptyLinkWillCallLogMethodFourTimes()
+    public function advisoriesWithEmptyLinkWillCallLogMethodFourTimesAndThrowBuildException()
     {
         $vulnerabilities = [
             'my/dependency' => [
@@ -145,20 +147,6 @@ class SecurityCheckerTaskUnitTest extends TestCase
     }
 
     /**
-     * @test
-     * @expectedException \BuildException
-     */
-    public function throwsBuildExceptionWhenVulnerabilitiesFound()
-    {
-        $this->checker->expects($this->once())
-            ->method('getLastVulnerabilityCount')
-            ->will($this->returnValue(1));
-
-        $this->checkerTask->setLockfile(__FILE__);
-        $this->checkerTask->main();
-    }
-
-    /**
      * Helper method to create all required mock objects and configure the {@link \SensioLabs\Security\SecurityChecker}
      * instance to return the given $vulnerabilities.
      *
@@ -166,14 +154,14 @@ class SecurityCheckerTaskUnitTest extends TestCase
      */
     protected function createMockObjects(array $vulnerabilities = [])
     {
-        $this->crawler = $this->createMock(CrawlerInterface::class);
+        $this->crawler = $this->createMock(Crawler::class);
         $this->checker = $this->createMock(SecurityChecker::class);
         $this->checker->expects($this->any())
             ->method('check')
-            ->will($this->returnValue($vulnerabilities));
+            ->willReturn($vulnerabilities);
         $this->checker->expects($this->any())
             ->method('getCrawler')
-            ->will($this->returnValue($this->crawler));
+            ->willReturn($this->crawler);
 
         $this->checkerTask = $this->createPartialMock(
             SecurityCheckerTask::class,
@@ -184,7 +172,7 @@ class SecurityCheckerTaskUnitTest extends TestCase
         );
         $this->checkerTask->expects($this->any())
             ->method('getSecurityChecker')
-            ->will($this->returnValue($this->checker));
+            ->willReturn($this->checker);
         $this->checkerTask->setProject(new \Project());
     }
 }
