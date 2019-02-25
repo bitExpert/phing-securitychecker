@@ -5,6 +5,8 @@ matrix:
     - php: 7.1
       env:
         - TEST_COVERAGE=true
+    - php: 7.2
+    - php: 7.3
 
 install:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev satooshi/php-coveralls ; fi
@@ -20,4 +22,4 @@ script:
   - if [[ $TEST_COVERAGE != 'true' ]]; then ./vendor/bin/phpunit ; fi
 
 after_script:
-  - if [[ $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/coveralls -v ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then ./vendor/bin/php-coveralls -v ; fi
