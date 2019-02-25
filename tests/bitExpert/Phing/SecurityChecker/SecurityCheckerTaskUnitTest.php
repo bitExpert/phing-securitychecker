@@ -31,7 +31,7 @@ class SecurityCheckerTaskUnitTest extends TestCase
      */
     private $checker;
     /**
-     * @var SecurityCheckerTask
+     * @var SecurityCheckerTask|TestCase
      */
     private $checkerTask;
 
@@ -47,19 +47,21 @@ class SecurityCheckerTaskUnitTest extends TestCase
 
     /**
      * @test
-     * @expectedException \BuildException
      */
     public function throwsBuildExceptionWhenNoLockFileWasPassed()
     {
+        $this->expectException(\BuildException::class);
+
         $this->checkerTask->main();
     }
 
     /**
      * @test
-     * @expectedException \BuildException
      */
     public function throwsBuildExceptionWhenNoLockFileIsNotAccessible()
     {
+        $this->expectException(\BuildException::class);
+
         $this->checkerTask->setLockfile(md5("-"));
         $this->checkerTask->main();
     }
@@ -92,10 +94,11 @@ class SecurityCheckerTaskUnitTest extends TestCase
 
     /**
      * @test
-     * @expectedException \BuildException
      */
     public function advisoriesIncludingLinkWillCallLogMethodFiveTimesAndThrowBuildException()
     {
+        $this->expectException(\BuildException::class);
+
         $vulnerabilities = [
             'my/dependency' => [
                 'version' => '1.0.0',
@@ -120,10 +123,11 @@ class SecurityCheckerTaskUnitTest extends TestCase
 
     /**
      * @test
-     * @expectedException \BuildException
      */
     public function advisoriesWithEmptyLinkWillCallLogMethodFourTimesAndThrowBuildException()
     {
+        $this->expectException(\BuildException::class);
+
         $vulnerabilities = [
             'my/dependency' => [
                 'version' => '1.0.0',
