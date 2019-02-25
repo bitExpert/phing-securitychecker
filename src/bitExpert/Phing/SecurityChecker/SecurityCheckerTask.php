@@ -67,6 +67,7 @@ class SecurityCheckerTask extends \Task
         }
 
         $checker = $this->getSecurityChecker();
+        $vulnerabilities = [];
 
         try {
             if (!empty($this->timeout)) {
@@ -77,7 +78,6 @@ class SecurityCheckerTask extends \Task
             }
 
             $vulnerabilities = $checker->check($this->lockFile);
-
             foreach ($vulnerabilities as $dependency => $issues) {
                 $dependencyFullName = $dependency . ' (' . $issues['version'] . ')';
                 $this->log($dependencyFullName);
@@ -101,7 +101,7 @@ class SecurityCheckerTask extends \Task
             throw new \BuildException($e);
         }
 
-        if ($checker->getLastVulnerabilityCount() > 0) {
+        if (count($vulnerabilities) > 0) {
             throw new \BuildException('Vulnerabilities found!');
         }
     }

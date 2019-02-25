@@ -32,7 +32,7 @@ in your main build.xml file:
 
 ```xml
     <property name="securitychecker.lockfile" value="composer.lock" />
-    <property name="securitychecker.endpoint" value="https://security.sensiolabs.org/check_lock" />
+    <property name="securitychecker.endpoint" value="https://security.symfony.com/check_lock" />
 ```
 
 Or define the securitychecker task on your own:
