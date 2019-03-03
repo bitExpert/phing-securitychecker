@@ -13,6 +13,7 @@ namespace bitExpert\Phing\SecurityChecker;
 
 use PHPUnit\Framework\TestCase;
 use SensioLabs\Security\Crawler;
+use SensioLabs\Security\Result;
 use SensioLabs\Security\SecurityChecker;
 
 /**
@@ -162,7 +163,7 @@ class SecurityCheckerTaskUnitTest extends TestCase
         $this->checker = $this->createMock(SecurityChecker::class);
         $this->checker->expects($this->any())
             ->method('check')
-            ->willReturn($vulnerabilities);
+            ->willReturn(new Result(count($vulnerabilities), json_encode($vulnerabilities), 'json'));
         $this->checker->expects($this->any())
             ->method('getCrawler')
             ->willReturn($this->crawler);
