@@ -67,8 +67,6 @@ class SecurityCheckerTask extends \Task
         }
 
         $checker = $this->getSecurityChecker();
-        $vulnerabilities = [];
-
         try {
             if (!empty($this->timeout)) {
                 $checker->getCrawler()->setTimeout($this->timeout);
@@ -77,8 +75,22 @@ class SecurityCheckerTask extends \Task
                 $checker->getCrawler()->setEndPoint($this->endPoint);
             }
 
-            $vulnerabilities = $checker->check($this->lockFile);
-            foreach ($vulnerabilities as $dependency => $issues) {
+            $vulnerabilities = $checker->check($this->lockFile, 'json');
+            if ($vulnerabilities->count() === 0) {
+                $this->log('No vulnerabilities found!');
+                return;
+            }
+
+            if ($vulnerabilities->getFormat() !== 'json') {
+                throw new \BuildException('Was expecting JSON response, but got "' . $vulnerabilities->getFormat().'"');
+            }
+
+            $dependencies = json_decode($vulnerabilities->__toString(), true);
+            if (!is_array($dependencies)) {
+                throw new \BuildException('The web service response could not be parsed!');
+            }
+
+            foreach ($dependencies as $dependency => $issues) {
                 $dependencyFullName = $dependency . ' (' . $issues['version'] . ')';
                 $this->log($dependencyFullName);
                 $this->log(str_repeat('-', strlen($dependencyFullName)));
@@ -101,9 +113,7 @@ class SecurityCheckerTask extends \Task
             throw new \BuildException($e);
         }
 
-        if (count($vulnerabilities) > 0) {
-            throw new \BuildException('Vulnerabilities found!');
-        }
+        throw new \BuildException('Vulnerabilities found!');
     }
 
     /**

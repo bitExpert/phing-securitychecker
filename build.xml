@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="securitychecker" basedir="." default="check">
+<project name="securitychecker" basedir="." default="security:check">
 
     <taskdef name="securitychecker" classpath="${phing.dir.securitychecker}/src" classname="bitExpert\Phing\SecurityChecker\SecurityCheckerTask" />
 
@@ -13,6 +13,15 @@
             </or>
             <then>
                 <property name="securitychecker.lockfile" value="${phing.dir}/composer.lock" override="true" />
+            </then>
+        </if>
+
+        <if>
+            <not>
+                <isset property="securitychecker.endpoint" />
+            </not>
+            <then>
+                <property name="securitychecker.endpoint" value="" override="true" />
             </then>
         </if>
 

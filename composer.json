@@ -17,6 +17,7 @@
   "license": "Apache-2.0",
   "require": {
     "php": "^7.1",
+    "ext-json": "*",
     "phing/phing": "^2.8.0",
     "sensiolabs/security-checker": "^5.0"
   },
