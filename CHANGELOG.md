@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 0.4.0
+
+### Added
+
+- [#13](https://github.com/bitExpert/phing-securitychecker/pull/13) Upgrade to PHPUnit 7.5
+- [#12](https://github.com/bitExpert/phing-securitychecker/pull/12) Upgrade sensiolabs/security-checker to version 5
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 0.3.0
 
 ### Added
