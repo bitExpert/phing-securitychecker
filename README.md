@@ -14,7 +14,7 @@ The preferred way of installing `bitexpert/phing-securitychecker` is through Com
 composer.json:
 
 ```
-composer.phar require bitexpert/phing-securitychecker
+composer.phar require --dev bitexpert/phing-securitychecker
 ```
 
 Example
